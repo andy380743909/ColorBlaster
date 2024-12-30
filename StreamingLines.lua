@@ -66,7 +66,7 @@ function StreamingLines:update()
 end
 
 function StreamingLines:draw()
-    love.graphics.setColor(179, 153, 180, 173)
+    love.graphics.setColor(179/255.0, 153/255.0, 180/255.0, 173/255.0)
     for i,v in ipairs(self.lines) do
         v:draw()
     end

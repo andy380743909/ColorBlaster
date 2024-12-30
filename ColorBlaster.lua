@@ -82,7 +82,7 @@ function ColorBlaster:draw()
         c:draw()
     end
 	
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 	love.graphics.setFont(smallFont)
 	love.graphics.print("score: "..score.." time: "..string.format("%u", countDown), 20, 20)
 end

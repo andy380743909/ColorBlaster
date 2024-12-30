@@ -18,15 +18,15 @@ end
 function Enemy:setColor(glow)
     if (glow and not self.glowing) or (not glow and self.glowing) then
         if self.color == 0 then
-            love.graphics.setColor(194, 23, 29, 255)
+            love.graphics.setColor(194/255.0, 23/255.0, 29/255.0, 255/255.0)
         else
-            love.graphics.setColor(17, 41, 194, 255)
+            love.graphics.setColor(17/255.0, 41/255.0, 194/255.0, 255/255.0)
         end
     else
         if self.color == 0 then
-            love.graphics.setColor(235, 66, 66, 255)
+            love.graphics.setColor(235/255.0, 66/255.0, 66/255.0, 255/255.0)
         else
-            love.graphics.setColor(60, 62, 237, 255)
+            love.graphics.setColor(60/255.0, 62/255.0, 237/255.0, 255/255.0)
         end
     end
 end

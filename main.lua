@@ -11,7 +11,7 @@ function love.load()
 		highscore_new("highscore.txt", 1, "", 100)
 	end
 	highscore_load("highscore.txt")
-	love.graphics.setMode(1024, 768, false, true, 4 )
+	love.window.setMode(1024, 768, {fullscreen=false, vsync=1, msaa=4})
 	love.graphics.setBackgroundColor(0, 0, 0)
 	
 	tinyFont = love.graphics.newFont(15)
@@ -38,12 +38,12 @@ function love.draw()
     bglines:draw()
 	cb:draw()
 	if state == "ended" or state == "paused" or state == "loaded" then
-		love.graphics.setColor(0, 0, 0, 200)
+		love.graphics.setColor(0/255.0, 0/255.0, 0/255.0, 200/255.0)
 		love.graphics.rectangle("fill", 0, 0, love.graphics.getWidth(), love.graphics.getHeight())
 	end
 	if state == "ended" then
 		--drawEndScreen
-		love.graphics.setColor(255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 		love.graphics.setFont(hugeFont)
 		love.graphics.printf(score, 0, 100, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(largeFont)
@@ -55,7 +55,7 @@ function love.draw()
 		printCredits()
 	elseif state == "paused" then
 		--drawPauseScreen
-		love.graphics.setColor(255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 		love.graphics.setFont(largeFont)
 		love.graphics.printf("Paused", 0, 200, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(mediumFont)
@@ -66,7 +66,7 @@ function love.draw()
 		printCredits()
 	elseif state == "loaded" then
 		--drawMainScreen
-		love.graphics.setColor(255, 255, 255)
+		love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 		love.graphics.setFont(hugeFont)
 		love.graphics.printf("ColorBlaster", 0, 100, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(mediumFont)
@@ -79,7 +79,7 @@ function love.draw()
 end
 
 function printControls()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 	love.graphics.setFont(tinyFont)
 	love.graphics.printf("controls", 25, 700, love.graphics.getWidth(), 'left')
 	love.graphics.printf("w,a,s,d - red cirle", 25, 715, love.graphics.getWidth(), 'left')
@@ -87,14 +87,14 @@ function printControls()
 end
 
 function printCredits()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 	love.graphics.setFont(tinyFont)
 	love.graphics.printf("Built by Scott Moore (oberonix)", -25, 710, love.graphics.getWidth(), 'right')
 	love.graphics.printf("BuffBit.com", -25, 730, love.graphics.getWidth(), 'right')
 end
 
 function printHighScore()
-	love.graphics.setColor(255, 255, 255)
+	love.graphics.setColor(255/255.0, 255/255.0, 255/255.0)
 	love.graphics.setFont(smallFont)
 	love.graphics.printf("High Score: "..highscore[1], -25, 25, love.graphics.getWidth(), 'right')
 end
@@ -138,7 +138,7 @@ function love.keypressed(k)
 			state = "paused"
 		end
 	elseif state == "loaded" then
-		if k == ' ' then
+		if k == 'space' then
 			state = "running"
 		elseif k == 'q' then
 			love.event.push('quit')

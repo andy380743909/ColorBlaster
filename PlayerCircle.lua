@@ -10,9 +10,9 @@ end
 function PlayerCircle:draw()
 	love.graphics.setLineWidth(5)
     if self.color == 0 then
-        love.graphics.setColor(204, 43, 43, 255)
+        love.graphics.setColor(204/255.0, 43/255.0, 43/255.0, 255/255.0)
     else
-        love.graphics.setColor(69, 78, 204, 255)
+        love.graphics.setColor(69/255.0, 78/255.0, 204/255.0, 255/255.0)
     end
 	love.graphics.circle("fill", self.position.x, self.position.y, 50, 50)
 end
