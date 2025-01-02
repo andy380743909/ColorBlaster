@@ -46,6 +46,39 @@ function ColorBlaster:update(dt)
 		circles[1]:move(1)
 	end
     
+    local os = love.system.getOS()
+    if os == "iOS" or os == "Android" then
+        local joystick = love.joystick.getJoysticks()[2]
+        
+        leftXAxis = joystick:getAxis(1)
+        if leftXAxis < -0.1 then
+            circles[1]:move(3)
+        elseif leftXAxis > 0.1 then
+            circles[1]:move(1)
+        end
+        leftYAxis = joystick:getAxis(2)
+        if leftYAxis < -0.1 then
+            circles[1]:move(2)
+        elseif leftYAxis > 0.1 then
+            circles[1]:move(0)
+        end
+
+        rightXAxis = joystick:getAxis(4)
+        if rightXAxis < -0.1 then
+            circles[2]:move(3)
+        elseif rightXAxis > 0.1 then
+            circles[2]:move(1)
+        end
+
+        rightYAxis = joystick:getAxis(5)
+        if rightYAxis < -0.1 then
+            circles[2]:move(2)
+        elseif rightYAxis > 0.1 then
+            circles[2]:move(0)
+        end
+
+    end
+
     if (60 - countDown) / 5 > phase then
         phase = phase + 1
         self:spawnEnemies(0, 1)

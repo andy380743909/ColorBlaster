@@ -49,8 +49,8 @@ function love.draw()
 		love.graphics.setFont(largeFont)
 		love.graphics.printf("Game Over", 0, 300, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(mediumFont)
-		love.graphics.print("Press r to restart", 300, 500)
-		love.graphics.print("Press q to quit", 300, 550)
+		love.graphics.print("Press r / B to restart", 300, 500)
+		love.graphics.print("Press q / A to quit", 300, 550)
 		printControls()
 		printCredits()
 	elseif state == "paused" then
@@ -59,9 +59,9 @@ function love.draw()
 		love.graphics.setFont(largeFont)
 		love.graphics.printf("Paused", 0, 200, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(mediumFont)
-		love.graphics.print("Press esc to unpause", 300, 400)
-		love.graphics.print("Press r to restart", 300, 450)
-		love.graphics.print("Press q to quit", 300, 500)
+		love.graphics.print("Press esc / B to unpause", 300, 400)
+		love.graphics.print("Press r / START to restart", 300, 450)
+		love.graphics.print("Press q / A to quit", 300, 500)
 		printControls()
 		printCredits()
 	elseif state == "loaded" then
@@ -70,8 +70,8 @@ function love.draw()
 		love.graphics.setFont(hugeFont)
 		love.graphics.printf("ColorBlaster", 0, 100, love.graphics.getWidth(), 'center')
 		love.graphics.setFont(mediumFont)
-		love.graphics.print("Press space to start", 300, 400)
-		love.graphics.print("Press q to quit", 300, 500)
+		love.graphics.print("Press space / B to start", 300, 400)
+		love.graphics.print("Press q / A to quit", 300, 500)
 		printControls()
 		printCredits()
 	end
@@ -147,6 +147,36 @@ function love.keypressed(k)
 		if k == 'q' then
 			love.event.push('quit')
 		elseif k == 'r' then
+			state = "running"
+			cb:start()
+		end
+	end
+end
+
+function love.gamepadpressed(joystick, button)
+	if state == "paused" then
+		if button == 'a' then
+			love.event.push('quit')
+		elseif button == 'b' then
+			state = "running"
+		elseif button == 'start' then
+			state = "running"
+			cb:start()
+		end
+	elseif state == "running" then
+		if button == 'back' then
+			state = "paused"
+		end
+	elseif state == "loaded" then
+		if button == 'b' then
+			state = "running"
+		elseif button == 'a' then
+			love.event.push('quit')
+		end
+	elseif state == "ended" then
+		if button == 'a' then
+			love.event.push('quit')
+		elseif button == 'b' then
 			state = "running"
 			cb:start()
 		end
